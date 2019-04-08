@@ -1,37 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-class App extends React.Component {
-    constructor(props){
-        super(props);
+import Loader from './Loader';
+import SeasonDisplay from './SeasonDisplay';
 
-        this.state = {
-            lat: null,
-            errorMessage: ''
-        };
+class App extends React.Component {
+
+    state = {lat:null, errorMessage:''};
+
+    componentDidMount(){
         window.navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState({ lat: position.coords.latitude });
-            },
-            (err) => {
-                this.setState({ errorMessage: err.message });
-            }
+            position => this.setState({lat: position.coords.latitude}),
+            err => this.setState({errorMessage: err.message})
         );
     }
 
-    render() {
+    renderContent() {
         if (this.state.errorMessage && !this.state.lat){
             return <div>Error: {this.state.errorMessage }</div>
         }
 
         if (!this.state.errorMessage && this.state.lat){
-            return <div>Latitude: {this.state.lat}</div>
+            return <SeasonDisplay lat= {this.state.lat} />
         }
 
+        return <Loader message="Please accept location request brah!" />;
+    };
+
+    render() {
         return (
-            <div className="ui active inverted dimmer">
-                <div className="ui large text loader">Loading</div>
+            <div className="border red">
+                {this.renderContent()}
             </div>
-        );
+        )
     }
 }
 
