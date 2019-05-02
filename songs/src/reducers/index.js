@@ -4,16 +4,16 @@ const songsReducer = () => {
     return [
         {
             title: 'No Scrubs',
-            duraction: '4:05'
+            duration: '4:05'
         }, {
             title: 'Macarena',
-            duraction: '2:30'
+            duration: '2:30'
         }, {
             title: 'All Star',
-            duraction: '3:15'
+            duration: '3:15'
         }, {
             title: 'I Want It That Way',
-            duraction: '1:45'
+            duration: '1:45'
         }
     ];
 };
